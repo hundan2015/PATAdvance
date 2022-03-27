@@ -11,7 +11,11 @@
 			"iomanip": "cpp",
 			"map": "cpp",
 			"xstring": "cpp",
-			"queue": "cpp"
+			"queue": "cpp",
+			"system_error": "cpp",
+			"type_traits": "cpp",
+			"xlocale": "cpp",
+			"xutility": "cpp"
 		}
 	}
 }

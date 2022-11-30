@@ -10,6 +10,17 @@ void doSomething(T lad) {
 struct Cmp {
     void operator()(function<void()> func) { func(); }
 };
+template <class T>
+class Listenable {
+    T value;
+   public:
+    T getValue() { return value; }
+    Listenable(T _value) { value = _value; }
+    void changeValue(function<void()> func) {
+        func();
+        // updateModel
+    }
+};
 int main() {
     int dataasdf = 3;
     // Lambda 真的太他妈好用了！
@@ -20,6 +31,8 @@ int main() {
     function<void()> lds = bind(aFunc, []() {});
     function<void(function<void()>)> ano = aFunc;
     doSomething(aFunc);
+    Listenable<int> theInt = 1;
+
     Cmp shity;
     doSomething(shity);
 }

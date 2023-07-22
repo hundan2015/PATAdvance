@@ -171,3 +171,143 @@ int main() {
 ```
 
 ### 3. 丢了
+
+## 19考研
+
+### 1. Stepping Numbers
+
+#### Description
+
+A number is called a stepping number if all adjacent digits have an absolute
+difference of 1, e.g. ‘321’ is a Stepping Number while ‘421’ is not. Given two
+integers n and m, count the number of all the stepping numbers in range [N,
+M]. Note that the stepping numbers should have adjacent digits, which means
+that they consist of at least 2 digits.
+
+#### Input
+
+One line contains two integers, representing the values of N and M,
+respectively. The integers are separated by a space.
+
+#### Note
+
+For 70% of the cases: 0<=N, M<=1*108
+For 100% of the cases: 0<=N, M<=3*108
+
+#### Output
+
+One line contains an integer representing the number of stepping numbers in
+the range between N and M.
+
+```js
+Sample Input:
+2 21
+Sample Output:
+3
+```
+
+Hint: Stepping numbers between 2 and 21 are 10, 12 and 21.
+
+### 3. Nodes from the Root
+
+#### Description
+
+There is a binary tree with N nodes indexing from 0 to N-1, where 0 is the root.
+Each edge of the tree has an integer weight W. At first all the nodes could be reached from the root, through a sequence of edges.
+An integer threshold X (X >= 0) is used to close the edge, which means that all the edges whose weights are less than X will be closed.
+Given the tree and an integer Y, please find the minimum threshold X so that the number of nodes reachable from the root (including the root itself) is no more than Y.
+
+#### Input
+
+The first line contains one integer N, representing the number of nodes in the
+tree.
+The second line contains one integer Y, representing the maximum number of nodes allowed to be reachable from the root.
+Each of the following N-1 lines contains three integers U, V, W, representing that the edge between node U and node V has a weight W. The integers are separated by a space.
+#### Note
+2 <= N <= 2*104
+1 <= Y <= N
+1 <= W <= 107
+Output
+One line with a single integer, representing the minimum threshold X.
+
+#### Note
+
+X >= 0
+**Sample Input1**
+
+```js
+3
+2
+0 1 2
+0 2 3
+```
+
+**Sample Output1**
+
+```js
+3
+```
+
+**Sample Input2**
+
+```js
+6
+3
+0 1 8
+0 2 3
+1 3 2
+1 4 5
+2 5 6
+```
+
+**Sample Output2**
+4
+Hint
+In sample1, the closed edge is (0, 1, 2)
+In sample2, the closed edges are (0, 2, 3) and (1, 3, 2)
+
+### 3. Distinct Subsequences
+
+#### Description
+
+Given a string S and a string T, count the number of distinct subsequences
+of S which is equal to T.
+A subsequence of a string is a new string which is formed from the original
+string by deleting some (can be none) of the characters without disturbing the
+relative positions of the remaining characters. (i.e., "nus" is a subsequence
+of "njucs" while "nsu" is not).
+
+#### Input
+
+The input contains two lines. The first line is the string S, and the second line
+is the string T.
+#### Note:
+ We denote the lengths of S and T as len(S) and len(T), respectively. There
+are restrictions as follows:
+1 <= len(S) <= 104
+1 <= len(T) <= 104
+#### Output
+The output is a single number which is the total number T of distinct
+subsequences of S.
+#### Note
+0<= S <= 232-1
+**Sample Input**
+
+```js
+njnunju
+nju
+```
+
+**Sample Output**
+
+```js
+5
+```
+
+**Hint:** As shown below, there are 5 ways you can generate "nju" from S:
+
+<u>nj</u>n<u>u</u>nju
+<u>nj</u>nunj<u>u</u>
+<u>n</u>jnun<u>ju</u>
+nj<u>n</u>un<u>ju</u>
+njnu<u>nju</u>

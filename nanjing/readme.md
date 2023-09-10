@@ -208,7 +208,37 @@ Sample Output:
 
 Hint: Stepping numbers between 2 and 21 are 10, 12 and 21.
 
-### 3. Nodes from the Root
+直接进行搜索。附带最大值剪枝。
+
+```c++
+#include <math.h>
+#include <iostream>
+#include <vector>
+using namespace std;
+int count = 0;
+int n, m;
+void dfs(int number, int lastNumber, int lastdigit) {
+    int tempNum = number + pow(10, lastdigit) * lastNumber;
+    if (tempNum >= n && tempNum <= m && lastNumber != 0 && lastdigit != 0) {
+        count++;
+    }
+    if (tempNum > m)
+        return;
+    if (lastNumber + 1 < 10)
+        dfs(tempNum, lastNumber + 1, lastdigit + 1);
+    if (lastNumber - 1 >= 0)
+        dfs(tempNum, lastNumber - 1, lastdigit + 1);
+}
+int main() {
+    cin >> n >> m;
+    for (int i = 0; i < 10; i++) {
+        dfs(0, i, 0);
+    }
+    cout << count;
+}
+```
+
+### 2. Nodes from the Root
 
 #### Description
 
@@ -219,8 +249,7 @@ Given the tree and an integer Y, please find the minimum threshold X so that the
 
 #### Input
 
-The first line contains one integer N, representing the number of nodes in the
-tree.
+The first line contains one integer N, representing the number of nodes in the tree.
 The second line contains one integer Y, representing the maximum number of nodes allowed to be reachable from the root.
 Each of the following N-1 lines contains three integers U, V, W, representing that the edge between node U and node V has a weight W. The integers are separated by a space.
 #### Note
@@ -311,3 +340,43 @@ nju
 <u>n</u>jnun<u>ju</u>
 nj<u>n</u>un<u>ju</u>
 njnu<u>nju</u>
+
+|     | n   | j     | u     |
+| --- | --- | ----- | ----- |
+| n   | 1   | 0     | 0     |
+| j   | 1   | 1=1+0 | 0     |
+| n   | 2   | 1     | 0     |
+| u   | 2   | 1     | 1=1+0 |
+| n   | 3   | 1     | 1     |
+| j   | 3   | 4=3+1 | 1     |
+| u   | 3   | 4     | 5=4+1 |
+
+第一版原来用了三层，其中第三层用的是计算sum。然后优化到两层，直接记录sum。
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+int main() {
+    string data;
+    string target;
+    cin >> data >> target;
+    vector<vector<int>> dp(target.size(), vector<int>(data.size(), 0));
+    for (int i = 0; i < data.size(); ++i) {
+        if (i != 0)
+            dp[0][i] = dp[0][i - 1];
+        if (data[i] == target[0]) {
+            dp[0][i] += 1;
+        }
+    }
+    for (int i = 1; i < target.size(); i++) {
+        for (int j = 1; j < data.size(); ++j) {
+            dp[i][j] = dp[i][j - 1];
+            if (data[j] == target[i]) {
+                dp[i][j] += dp[i - 1][j - 1];
+            }
+        }
+    }
+    cout << dp[target.size() - 1][data.size() - 1];
+}
+```

@@ -11,15 +11,19 @@ struct Node {
     Node(int d, int da) : data(d), distance(da) {}
 };
 int posCount, gasCount, roadCount, serve;
-bool hasSolution = false;
+
+bool                hasSolution = false;
 vector<vector<int>> mat;
-map<string, int> nameMap;
-double minAvr = 9999999, minDist = -1;
-int bestPos;
-void dij(int position) {
+map<string, int>    nameMap;
+double              minAvr = 9999999, minDist = -1;
+int                 bestPos;
+void                dij(int position)
+{
     vector<int> distTo(posCount + gasCount, 99999999);
     distTo[position] = 0;
-    auto cmp = [](Node* n1, Node* n2) { return n1->distance > n2->distance; };
+    auto cmp = [](Node* n1, Node* n2) {
+        return n1->distance > n2->distance;
+    };
     priority_queue<Node*, vector<Node*>, decltype(cmp)> nodeQue(cmp);
     nodeQue.push(new Node(position, 0));
     while (!nodeQue.empty()) {
@@ -38,7 +42,7 @@ void dij(int position) {
         }
     }
     double sum = 0;
-    int minum = 999999;
+    int    minum = 999999;
     for (int i = 0; i < posCount; ++i) {
         sum += distTo[i];
         minum = min(distTo[i], minum);
@@ -58,7 +62,8 @@ void dij(int position) {
         minDist = minum;
     }
 }
-int main() {
+int main()
+{
     cin >> posCount >> gasCount >> roadCount >> serve;
     mat = vector<vector<int>>(posCount + gasCount,
                               vector<int>(posCount + gasCount, -1));
@@ -70,7 +75,7 @@ int main() {
     }
     for (int i = 0; i < roadCount; ++i) {
         string pos1, pos2;
-        int data;
+        int    data;
         cin >> pos1 >> pos2 >> data;
         mat[nameMap[pos1]][nameMap[pos2]] = data;
         mat[nameMap[pos2]][nameMap[pos1]] = data;
